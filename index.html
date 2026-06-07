@@ -815,22 +815,17 @@ btn.onclick = () => {
 };
 
 r.onresult = (e) => {
-  let newFinal   = '';
-  let newInterim = '';
-
+  // Solo procesar desde el índice actual, nunca reprocesar anteriores
   for (let i = e.resultIndex; i < e.results.length; i++) {
     const transcript = e.results[i][0].transcript;
     if (e.results[i].isFinal) {
-      newFinal += transcript + ' ';
+      finalText += transcript + ' ';
+      interimText = ''; // limpiar interino cuando hay final
     } else {
-      newInterim = transcript; // Solo el último interino
+      interimText = transcript; // solo el último interino, no acumular
     }
   }
 
-  if (newFinal) finalText += newFinal;
-  interimText = newInterim;
-
-  // Mostrar vista previa: texto final + interino
   const preview = (finalText + interimText).trim();
   if (preview) {
     tx.style.display = 'block';
@@ -840,8 +835,8 @@ r.onresult = (e) => {
 };
 
 r.onerror = (e) => {
-  if (e.error === 'no-speech') return; // Ignorar silencio
-  if (e.error === 'aborted') return;   // Ignorar stop manual
+  if (e.error === 'no-speech') return;
+  if (e.error === 'aborted') return;
   res.innerHTML = `⚠️ Error de micrófono: ${e.error}. Intentá de nuevo.`;
   clearInterval(interval);
   isRec = false;
@@ -851,9 +846,12 @@ r.onerror = (e) => {
 };
 
 r.onend = () => {
+  // NO reiniciar automático — evita duplicar resultados al reconectar
   if (isRec) {
-    // Reiniciar automáticamente si se cortó solo (ej. silencio prolongado)
-    try { r.start(); } catch(e) {}
+    // Pequeña pausa antes de reiniciar para que no reprocese el buffer anterior
+    setTimeout(() => {
+      if (isRec) try { r.start(); } catch(e) {}
+    }, 300);
   }
 };
 
