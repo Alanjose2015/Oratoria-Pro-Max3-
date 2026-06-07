@@ -2,23 +2,25 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Entrenador de Oratoria Profesional</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Entrenador Vocal Pro</title>
+  <!-- El punto barra (./) asegura que cargue correctamente en GitHub Pages -->
+  <link rel="stylesheet" href="./style.css">
 </head>
 <body>
   <main class="app-container">
     <header class="app-header">
-      <h1>🎙️ Entrenador Vocal para Grandes Audiencias</h1>
-      <p>Practica tu discurso y recibe análisis de claridad, velocidad y feedback de IA en tiempo real.</p>
+      <h1>🎙️ Entrenador Vocal Pro</h1>
+      <p>Optimizado para presentaciones ante grandes audiencias.</p>
     </header>
 
+    <!-- Panel de control táctil -->
     <section class="controls-panel">
       <button id="btn-action" class="btn-primary">Iniciar Práctica</button>
       <div id="status-badge" class="badge status-idle">Listo para grabar</div>
     </section>
 
-    <!-- Grilla de Métricas Locales -->
+    <!-- Grilla compacta de 3 columnas para celular -->
     <section class="metrics-grid">
       <div class="metric-card">
         <h3>TIEMPO</h3>
@@ -34,7 +36,7 @@
       </div>
     </section>
 
-    <!-- Resultados e Inteligencia Artificial -->
+    <!-- Reporte de Diagnóstico con Inteligencia Artificial -->
     <section id="ai-report-section" class="report-section hidden">
       <h2>📊 Diagnóstico Experto de IA</h2>
       
@@ -44,19 +46,20 @@
       </div>
 
       <div class="feedback-block">
-        <h3>📋 Consejos Personalizados para Público Extenso</h3>
-        <div id="ai-advice" class="markdown-body">Procesando tu tono de voz y estructura...</div>
+        <h3>📋 Consejos de Oratoria Masiva</h3>
+        <div id="ai-advice">Procesando métricas y análisis acústico...</div>
       </div>
     </section>
 
+    <!-- Caja de transcripción con scroll táctil -->
     <footer class="transcript-section">
       <h3>📝 Transcripción en Tiempo Real</h3>
       <p id="live-transcript" class="transcript-placeholder">Tu discurso aparecerá aquí conforme hables...</p>
     </footer>
   </main>
 
-  <!-- SDK Oficial de Google Gen AI (Módulo ESM) -->
-  <script type="module" src="app.js"></script>
+  <!-- Script modularizado para integrar el SDK de Gemini sin servidores -->
+  <script type="module" src="./app.js"></script>
 </body>
-                                                              </html>
+      </html>
   
